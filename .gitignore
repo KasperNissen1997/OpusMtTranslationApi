@@ -1,5 +1,6 @@
 # VSCode user specific files
 .vscode/
+!.vscode/launch.json
 
 # Don't include the models yet - add support for git LFS later
 models/

@@ -1,0 +1,5 @@
+python-dotenv
+transformers[sentencepiece]
+torch
+sacremoses
+torch-model-archiver
