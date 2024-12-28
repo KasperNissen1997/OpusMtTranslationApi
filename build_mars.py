@@ -17,7 +17,7 @@ overwrite_mar = parser.parse_args().overwrite_mar
 # Download the models from huggingface, if they aren't already stored locally
 for modelName in modelNames:
     # ------------------------------ Downloading ------------------------------
-    model_local_path = os.path.join(os.environ["LOCAL_MODEL_DIR"], "raw", modelName)
+    model_local_path = os.path.join(os.environ["LOCAL_MODEL_DIR"], os.environ["RAW_DIR"], modelName)
 
     if not os.path.isdir(model_local_path):
         print(f"Model folder for '{modelName}' wasn't found. Beginning download...")
@@ -44,7 +44,7 @@ for modelName in modelNames:
         print(f"Model '{modelName}' already downloaded. Skipping download.")
 
     # ---------------------------- Create .mar file ----------------------------
-    mar_file_path = os.path.join(os.environ["LOCAL_MODEL_DIR"], "mars", f"{modelName}.mar")
+    mar_file_path = os.path.join(os.environ["LOCAL_MODEL_DIR"], os.environ["MARS_DIR"], f"{modelName}.mar")
 
     if os.path.isfile(mar_file_path) and not overwrite_mar:
         print(f"Mar file for '{modelName}' is already built. Skipping build.\n")
@@ -63,7 +63,7 @@ for modelName in modelNames:
         
         for file in os.listdir(model_local_path):
             if file != "model.safetensors":
-                extra_file_paths.append(file)
+                extra_file_paths.append(os.path.join(model_local_path, file))
 
         torch_model_archiver_command = [
             "torch-model-archiver",

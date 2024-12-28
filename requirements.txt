@@ -3,3 +3,4 @@ transformers[sentencepiece]
 torch
 sacremoses
 torch-model-archiver
+torchserve
